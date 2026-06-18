@@ -1,0 +1,13 @@
+
+hk-skin.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+TrajanPro-Bold
+  rotate: false
+  xy: 1, 36
+  size: 506, 469
+  orig: 506, 469
+  offset: 0, 0
+  index: -1

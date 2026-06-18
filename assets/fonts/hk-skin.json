@@ -1,0 +1,51 @@
+{
+  com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    menu-font: {
+      file: TrajanPro-Bold.fnt
+      scaledSize: -1
+      markupEnabled: false
+      flip: false
+    }
+  }
+  com.badlogic.gdx.graphics.Color: {
+    text-click: {
+      r: 0.5019608
+      g: 0.5019608
+      b: 0.5019608
+      a: 1
+    }
+    text-hover: {
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    }
+    text-normal: {
+      r: 0.83137256
+      g: 0.83137256
+      b: 0.83137256
+      a: 1
+    }
+
+    label-color: {
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    }
+  },
+  com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+    default: {
+      font: menu-font
+      fontColor: label-color
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    default: {
+      font: menu-font
+      fontColor: text-normal
+      downFontColor: text-click
+      overFontColor: text-hover
+    }
+  }
+}
