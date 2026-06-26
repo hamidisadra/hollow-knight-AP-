@@ -46,7 +46,7 @@ public class PlayerController implements Screen {
     private final float speed = 800f;
     private final float dashSpeed = 1200f;
     private final float dashDuration = 0.48f;
-    private final float jumpSpeed = 1300f;
+    private final float jumpSpeed = 1500f;
     private final float doubleJumpSpeed = 1600f;
     private final float maxFallSpeed = 2500f;
     private final float jumpCutVelocity = 400f;
@@ -246,19 +246,28 @@ public class PlayerController implements Screen {
             }
 
             if (mossFly.isDead) {
-                mossFly.positionY -= gravity * delta;
-                mossFly.isOnGround = false;
+                float closestFloorY = -1000f;
 
-                for (Rectangle bound : platforms) {
-                    if (mossFly.hitBox.overlaps(bound)) {
-                        if (mossFly.positionY + 20f > bound.y + bound.height) {
-                            mossFly.positionY = bound.y + bound.height;
-                            mossFly.isOnGround = true;
-                            break;
+                    for (Rectangle bound : platforms) {
+                        if (mossFly.positionX + mossFly.width > bound.x &&
+                            mossFly.positionX < bound.x + bound.width) {
+
+                            if (bound.y + bound.height <= mossFly.positionY + 50f) {
+
+                                if (bound.y + bound.height > closestFloorY) {
+                                    closestFloorY = bound.y + bound.height;
+                                }
+                            }
                         }
                     }
-                }
-                mossFly.updateHitBox();
+
+                    if (closestFloorY != -1000f) {
+                        mossFly.positionY = closestFloorY - 10f;
+                        mossFly.spawny = mossFly.positionY;
+                        mossFly.isOnGround = true;
+                        mossFly.updateHitBox();
+                    }
+
                 mossFlyStateUpdate(mossFly, delta);
 
                 continue;
@@ -697,7 +706,7 @@ public class PlayerController implements Screen {
         if (!knight.isAttacking) return;
 
         if (!knight.isOnGround && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            knight.attackHitBox.set(knight.positionX, knight.positionY - 40, knight.width, 40);
+            knight.attackHitBox.set(knight.positionX - (knight.width / 2), knight.positionY - 40f, knight.width, 40f);
 
             for (Rectangle spike : spikes) {
                 if (knight.attackHitBox.overlaps(spike)) {

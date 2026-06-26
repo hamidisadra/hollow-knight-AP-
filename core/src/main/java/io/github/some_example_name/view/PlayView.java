@@ -160,6 +160,16 @@ public class PlayView {
 
         slashAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
 
+        // Slash Effect Animation
+
+        frameWidth = slashEffect.getWidth() / 5;
+        frameHeight = slashEffect.getHeight();
+        temp = TextureRegion.split(slashEffect, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+
+        slashEffectAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
         // DownSlash Animation
         frameWidth = downSlashTexture.getWidth() / 5;
         frameHeight = downSlashTexture.getHeight();
@@ -174,7 +184,7 @@ public class PlayView {
         frameHeight = downSlashEffect.getHeight();
         temp = TextureRegion.split(downSlashEffect, frameWidth, frameHeight);
         frames.clear();
-        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        for (int i = 4; i >= 0; i--) frames.add(temp[0][i]);
         downSlashEffectAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
 
 
@@ -308,14 +318,26 @@ public class PlayView {
 
             batch.draw(
                 currentSlashEffect.getTexture(),
-                knight.positionX , knight.positionY - (knight.height / 2),
-                knight.width / 10, knight.height,
+                knight.positionX - (knight.width / 2),
+                knight.positionY - 40f,
+                knight.width, 40f,
                 currentFrame.getRegionX(), currentFrame.getRegionY(),
                 currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
                 knight.isGoingRight, false
             );
         } else if (currenState == Knight.State.ATTACKING) {
             currentFrame = slashAnimation.getKeyFrame(stateDuration, false);
+            currentSlashEffect = slashEffectAnimation.getKeyFrame(stateDuration, false);
+
+            batch.draw(
+                currentSlashEffect.getTexture(),
+                (knight.isGoingRight ? (knight.positionX + knight.hitBox.width) : (knight.positionX - 80f)),
+                knight.positionY,
+                80f, knight.height,
+                currentFrame.getRegionX(), currentFrame.getRegionY(),
+                currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
+                knight.isGoingRight, false
+            );
         } else if (currenState == Knight.State.DOUBLE_JUMPING) {
             currentFrame = doubleJumpAnimation.getKeyFrame(stateDuration, false);
         } else if (currenState == Knight.State.WALL_SLIDING) {
