@@ -1,0 +1,289 @@
+{
+    "activeFile": "biggerShrine.tsx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "243b35.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "4a7844.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/ASUS/AppData/Local/Temp/709ab4ed-3523-4fd2-8db8-9db93f370030_Tiled Workshop.zip.Tiled Workshop.zip/training/crysalPath.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/AppData/Local/Temp/709ab4ed-3523-4fd2-8db8-9db93f370030_Tiled Workshop.zip.Tiled Workshop.zip/training/crystal.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/AppData/Local/Temp/709ab4ed-3523-4fd2-8db8-9db93f370030_Tiled Workshop.zip.Tiled Workshop.zip/training/flame.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/AppData/Local/Temp/709ab4ed-3523-4fd2-8db8-9db93f370030_Tiled Workshop.zip.Tiled Workshop.zip/training/newMap.tmx": {
+            "scale": 0.48828125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 12000.256000000001,
+                "y": 8000.512000000001
+            }
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/3a4a66.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/archbase.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/bigroof1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/bigroof2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/black.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/cd_FG_bone_09.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/cd_archway_02.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/cd_broken_wall.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/cd_dead_guardians_01_0001_07.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/cd_floor_highway_05.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/chain.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/chair.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/dark blue image.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/floor fg rock.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/gatewy1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/ground.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/lamp1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/map.tmx": {
+            "scale": 0.5205078125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2000.9305816135084,
+                "y": 1399.594746716698
+            }
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/shell.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/shell2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/statue1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/toll_booth_front_small.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/vil_floor_01.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/wall.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/well_bricks_r.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/well_extension_0001_1.tsx": {
+            "scaleInDock": 1
+        },
+        "biggerShrine.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "black image.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "brakable wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "breakable wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "floor1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "floor2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "gate to the next map.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "map.tmx": {
+            "expandedObjectLayers": [
+                14
+            ],
+            "scale": 0.33,
+            "selectedLayer": 13,
+            "viewCenter": {
+                "x": 7759.090909090908,
+                "y": 2886.3636363636365
+            }
+        },
+        "plan3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant5.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant6.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant7.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant8.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant9.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock5.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rock6.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rocky floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "rocky roof.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "slug shrine 2.tsx": {
+            "scaleInDock": 0.125,
+            "scaleInEditor": 1
+        },
+        "slug shrine.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "taq.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "wall2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "wall3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/green path map/Greenpath",
+    "map.height": 270,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 500,
+    "openFiles": [
+        "map.tmx",
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/map.tmx",
+        "wall3.tsx",
+        "rock6.tsx",
+        "rock5.tsx",
+        "plant8.tsx",
+        "plant9.tsx",
+        "wall2.tsx",
+        "brakable wall.tsx",
+        "breakable wall.tsx",
+        "rocky floor.tsx",
+        "rocky roof.tsx",
+        "gate to the next map.tsx",
+        "floor2.tsx",
+        "biggerShrine.tsx"
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "C:/Users/ASUS/AppData/Local/Temp/709ab4ed-3523-4fd2-8db8-9db93f370030_Tiled Workshop.zip.Tiled Workshop.zip/training/newMap.tmx",
+        "map.tmx",
+        "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/forgotten crossroad amp/map.tmx",
+        "wall3.tsx",
+        "rock6.tsx",
+        "rock5.tsx",
+        "plant8.tsx",
+        "plant9.tsx",
+        "wall2.tsx",
+        "brakable wall.tsx",
+        "breakable wall.tsx",
+        "rocky floor.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}

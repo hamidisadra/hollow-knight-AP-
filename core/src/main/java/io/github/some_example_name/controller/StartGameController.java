@@ -54,7 +54,7 @@ public class StartGameController implements Screen {
                     view.fadeOutTransition(new Runnable() {
                         @Override
                         public void run() {
-                            System.out.println("Slot " + (slotIndex + 1) + " clicked!");
+                            game.setScreen(new PlayerController(game));
                         }
                     });
                 }

@@ -10,8 +10,9 @@ import io.github.some_example_name.model.GameData;
 public class HollowKnightGame extends Game {
     private SpriteBatch batch;
     public GameData gameData;
-    public Music menuMusic;
-    public boolean isSfxEnabled = true;
+    public Music menuMusic, greenPathMusic, greenPathatmosMusic, greenPahtFightMusic;
+
+    public boolean isSfxEnabled = true, greenPath = false, greenPathFight = false;
 
 
     @Override
@@ -20,8 +21,27 @@ public class HollowKnightGame extends Game {
         gameData = new GameData();
 
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Title.wav"));
+        greenPathMusic = Gdx.audio.newMusic(Gdx.files.internal("green path map/S5 Green Path Main.wav"));
+        greenPathatmosMusic = Gdx.audio.newMusic(Gdx.files.internal("green path map/green_path_atmos_loop.wav"));
+        greenPahtFightMusic = Gdx.audio.newMusic(Gdx.files.internal("green path map/S5 Green Path Action.wav"));
+
         menuMusic.setLooping(true);
-        menuMusic.play();
+        greenPathMusic.setLooping(true);
+        greenPathatmosMusic.setLooping(true);
+        greenPahtFightMusic.setLooping(true);
+
+        if (greenPath) {
+            if (greenPathFight) {
+                greenPahtFightMusic.play();
+            }
+            else {
+                greenPathatmosMusic.play();
+                greenPathMusic.play();
+            }
+        }
+        else {
+            menuMusic.play();
+        }
 
         this.setScreen(new MainMenuController(this));
 

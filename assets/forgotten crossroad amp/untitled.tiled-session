@@ -1,0 +1,48 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Base_Crossroads.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "ground.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "untitled.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 599.5,
+                "y": 1768.5
+            }
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets",
+    "last.imagePath": "C:/Users/ASUS/IdeaProjects/Hollow Knight/assets/Forgotten Crossroads",
+    "map.height": 2560,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 1440,
+    "openFiles": [
+        "ground.tsx"
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "ground.tsx",
+        "untitled.tmx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}
