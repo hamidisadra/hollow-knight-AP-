@@ -1,6 +1,4 @@
-package io.github.some_example_name.model;
-
-import java.awt.*;
+package io.github.some_example_name.model.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

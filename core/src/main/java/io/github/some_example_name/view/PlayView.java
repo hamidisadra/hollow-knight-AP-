@@ -11,9 +11,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 
-import io.github.some_example_name.model.Knight;
-import io.github.some_example_name.model.MossFly;
-import io.github.some_example_name.model.Mosscreep;
+import io.github.some_example_name.model.entities.Enemy;
+import io.github.some_example_name.model.entities.Knight;
+import io.github.some_example_name.model.entities.MossFly;
+import io.github.some_example_name.model.entities.Mosscreep;
 
 public class PlayView {
     private final ShapeRenderer shapeRenderer;
@@ -286,7 +287,7 @@ public class PlayView {
 
     }
 
-    public void render(Knight knight, Array<Mosscreep> mosscreeps, Array<MossFly> mossFlies, OrthographicCamera camera) {
+    public void render(Knight knight, Array<Enemy> enemies, OrthographicCamera camera) {
         mapRenderer.setView(camera);
 
         mapRenderer.render(backgroundLayers);
@@ -344,76 +345,61 @@ public class PlayView {
             currentFrame = wallSlidingAnimation.getKeyFrame(stateDuration, true);
         } else if (currenState == Knight.State.WALL_JUMP) {
             currentFrame = wallJumpingAnimation.getKeyFrame(stateDuration, false);
-        }else {
+        } else {
             currentFrame = idleAnimation.getKeyFrame(stateDuration, true);
         }
 
         batch.draw(
             currentFrame.getTexture(),
-            knight.positionX - 90f, knight.positionY -2f,
+            knight.positionX - 90f, knight.positionY - 2f,
             knight.width, knight.height,
             currentFrame.getRegionX(), currentFrame.getRegionY(),
             currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
             knight.isGoingRight, false
         );
 
+        for (Enemy enemy : enemies) {
+            TextureRegion currentEnemyFrame = null;
 
-        for (Mosscreep mosscreep : mosscreeps) {
-            TextureRegion mosscreepCurrentFrame;
-            Mosscreep.State mosscreepCurrenState = mosscreep.currentState;
-            float mosscreepStateDuration = mosscreep.stateDuration;
-
-            if (mosscreepCurrenState == Mosscreep.State.TURNING) {
-                mosscreepCurrentFrame = mossCreepTurnAnimation.getKeyFrame(mosscreepStateDuration, false);
-            } else if (mosscreepCurrenState == Mosscreep.State.DEATH_AIR) {
-                mosscreepCurrentFrame = mossCreepDeathAirAnimation.getKeyFrame(mosscreepStateDuration, false);
-            } else if (mosscreepCurrenState == Mosscreep.State.DEATH_LAND) {
-                mosscreepCurrentFrame = mossCreepDeathLandAnimation.getKeyFrame(mosscreepStateDuration, true);
-            } else {
-                mosscreepCurrentFrame = mossCreepWalkAnimation.getKeyFrame(mosscreepStateDuration, true);
+            if (enemy instanceof Mosscreep) {
+                if (((Mosscreep) enemy).currentState == Mosscreep.State.TURNING) {
+                    currentEnemyFrame = mossCreepTurnAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((Mosscreep) enemy).currentState == Mosscreep.State.DEATH_AIR) {
+                    currentEnemyFrame = mossCreepDeathAirAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((Mosscreep) enemy).currentState == Mosscreep.State.DEATH_LAND) {
+                    currentEnemyFrame = mossCreepDeathLandAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else {
+                    currentEnemyFrame = mossCreepWalkAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+            } else if (enemy instanceof MossFly) {
+                if (((MossFly) enemy).currentState == MossFly.State.TURNING_TO_FLY) {
+                    currentEnemyFrame = mossFlyTurningAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((MossFly) enemy).currentState == MossFly.State.DEATH_AIR) {
+                    currentEnemyFrame = mossCreepDeathAirAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((MossFly) enemy).currentState == MossFly.State.DEATH_LAND) {
+                    currentEnemyFrame = mossCreepDeathLandAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else if (((MossFly) enemy).currentState == MossFly.State.FLYING) {
+                    currentEnemyFrame = mossFlyFlyingAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else if (((MossFly) enemy).currentState == MossFly.State.APPEAR) {
+                    currentEnemyFrame = mossFlyAppearingAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else {
+                    currentEnemyFrame = mossFlyShakingAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
             }
 
-            batch.draw(
-                mosscreepCurrentFrame.getTexture(),
-                mosscreep.positionX , mosscreep.positionY ,
-                mosscreep.width, mosscreep.height,
-                mosscreepCurrentFrame.getRegionX(), mosscreepCurrentFrame.getRegionY(),
-                mosscreepCurrentFrame.getRegionWidth(), mosscreepCurrentFrame.getRegionHeight(),
-                mosscreep.isGoingRight, false
-            );
-        }
-
-        for (MossFly mossFly : mossFlies) {
-            TextureRegion mossFlyCurrentFrame;
-            MossFly.State mossFlyCurrenState = mossFly.currentState;
-            float mossFlyStateDuration = mossFly.stateDuration;
-
-            if (mossFlyCurrenState == MossFly.State.TURNING_TO_FLY) {
-                mossFlyCurrentFrame = mossFlyTurningAnimation.getKeyFrame(mossFlyStateDuration, false);
-            } else if (mossFlyCurrenState == MossFly.State.DEATH_AIR) {
-                mossFlyCurrentFrame = mossCreepDeathAirAnimation.getKeyFrame(mossFlyStateDuration, false);
-            } else if (mossFlyCurrenState == MossFly.State.DEATH_LAND) {
-                mossFlyCurrentFrame = mossCreepDeathLandAnimation.getKeyFrame(mossFlyStateDuration, true);
-            }else if (mossFlyCurrenState == MossFly.State.FLYING) {
-                mossFlyCurrentFrame = mossFlyFlyingAnimation.getKeyFrame(mossFlyStateDuration, true);
-            } else if (mossFlyCurrenState == MossFly.State.APPEAR) {
-                mossFlyCurrentFrame = mossFlyAppearingAnimation.getKeyFrame(mossFlyStateDuration, false);
-            }else {
-                mossFlyCurrentFrame = mossFlyShakingAnimation.getKeyFrame(mossFlyStateDuration, true);
+            if (currentEnemyFrame != null) {
+                batch.draw(
+                    currentEnemyFrame.getTexture(),
+                    enemy.positionX, enemy.positionY,
+                    enemy.width, enemy.height,
+                    currentEnemyFrame.getRegionX(), currentEnemyFrame.getRegionY(),
+                    currentEnemyFrame.getRegionWidth(), currentEnemyFrame.getRegionHeight(),
+                    enemy.isGoingRight, false
+                );
             }
-
-            batch.draw(
-                mossFlyCurrentFrame.getTexture(),
-                mossFly.positionX , mossFly.positionY ,
-                mossFly.width, mossFly.height,
-                mossFlyCurrentFrame.getRegionX(), mossFlyCurrentFrame.getRegionY(),
-                mossFlyCurrentFrame.getRegionWidth(), mossFlyCurrentFrame.getRegionHeight(),
-                mossFly.isGoingRight, false
-            );
         }
 
         batch.end();
-
         mapRenderer.render(foregroundLayers);
     }
 
