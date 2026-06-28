@@ -11,10 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 
-import io.github.some_example_name.model.entities.Enemy;
-import io.github.some_example_name.model.entities.Knight;
-import io.github.some_example_name.model.entities.MossFly;
-import io.github.some_example_name.model.entities.Mosscreep;
+import io.github.some_example_name.model.entities.*;
 
 public class PlayView {
     private final ShapeRenderer shapeRenderer;
@@ -31,8 +28,17 @@ public class PlayView {
     private Texture mossFlyShaking, mossFlyAppearing, mossFlyFlying, mossFlyTurning;
     private Animation<TextureRegion> mossFlyShakingAnimation, mossFlyAppearingAnimation, mossFlyFlyingAnimation, mossFlyTurningAnimation;
 
+    private Texture huskHornheadStartAttacking, huskHornheadAttacking, huskHornheadDeath, huskHornheadStanding, huskHornheadTurning, huskHornheadWalking;
+    private Animation<TextureRegion> huskHornheadStartAttackingAnimation, huskHornheadAttackingAnimation, huskHornheadDeathAnimation, huskHornheadStandingAnimation, huskHornheadTurningAnimation, huskHornheadWalkingAnimation;
+
+    private Texture CrystalGuardianStanding, CrystalGuardianShooting, CrystalGuardianAttacking, CrystalGuardianTurning, CrystalGuardianEvading, CrystalGuardianDeathLand;
+    private Animation<TextureRegion> CrystalGuardianStandingAnimation, CrystalGuardianShootingAnimation, CrystalGuardianAttackingAnimation, CrystalGuardianTurningAnimation, CrystalGuardianEvadingAnimation, CrystalGuardianDeathLandAnimation;
+
+    private Texture breakableWallFirst, breakableWallSecond, breakableWallLast;
+
     private final int[] backgroundLayers;
     private final int[] midLayer;
+    private final int[] darkRoom;
     private final int[] foregroundLayers;
 
     public PlayView(TiledMap map) {
@@ -73,7 +79,7 @@ public class PlayView {
         int bg3 = map.getLayers().getIndex("bg3");
         int bg4 = map.getLayers().getIndex("bg4");
 
-        int breakableWall = map.getLayers().getIndex("breakable wall");
+        int darkRoom = map.getLayers().getIndex("darkRoom");
         int ground = map.getLayers().getIndex("ground");
 
 
@@ -82,7 +88,8 @@ public class PlayView {
         int fg1 = map.getLayers().getIndex("fg1");
 
         this.backgroundLayers = new int[] { blackLayer, greenLayer, bg_1, bg, bg1, bg2, bg3, bg4 };
-        this.midLayer = new int[] {breakableWall, ground};
+        this.midLayer = new int[] {ground};
+        this.darkRoom = new int[] {darkRoom};
         this.foregroundLayers = new int[] { fg, fg0, fg1};
     }
 
@@ -109,6 +116,25 @@ public class PlayView {
         this.mossFlyAppearing = new Texture(Gdx.files.internal("mossFly/Appear.png"));
         this.mossFlyFlying = new Texture(Gdx.files.internal("mossFly/Fly.png"));
         this.mossFlyTurning = new Texture(Gdx.files.internal("mossFly/TurnToFly.png"));
+
+        this.huskHornheadStartAttacking = new Texture(Gdx.files.internal("husk_hornhead/Attack Anticipate.png"));
+        this.huskHornheadAttacking = new Texture(Gdx.files.internal("husk_hornhead/Attack Lunge.png"));
+        this.huskHornheadDeath = new Texture(Gdx.files.internal("husk_hornhead/Death Land.png"));
+        this.huskHornheadStanding = new Texture(Gdx.files.internal("husk_hornhead/Idle.png"));
+        this.huskHornheadTurning = new Texture(Gdx.files.internal("husk_hornhead/Turn.png"));
+        this.huskHornheadWalking = new Texture(Gdx.files.internal("husk_hornhead/Walk.png"));
+
+        this.CrystalGuardianStanding = new Texture(Gdx.files.internal("Crystalized/Idle.png"));
+        this.CrystalGuardianShooting = new Texture(Gdx.files.internal("Crystalized/Shoot.png"));
+        this.CrystalGuardianAttacking = new Texture(Gdx.files.internal("Crystalized/Run.png"));
+        this.CrystalGuardianEvading = new Texture(Gdx.files.internal("Crystalized/Evade.png"));
+        this.CrystalGuardianTurning = new Texture(Gdx.files.internal("Crystalized/Turn.png"));
+        this.CrystalGuardianDeathLand = new Texture(Gdx.files.internal("Crystalized/Death Land.png"));
+
+        this.breakableWallFirst = new Texture(Gdx.files.internal("breakableWall/First.png"));
+        this.breakableWallSecond = new Texture(Gdx.files.internal("breakableWall/Second.png"));
+        this.breakableWallLast = new Texture(Gdx.files.internal("breakableWall/Last.png"));
+
     }
 
     public void loadAnimations() {
@@ -163,13 +189,13 @@ public class PlayView {
 
         // Slash Effect Animation
 
-        frameWidth = slashEffect.getWidth() / 5;
+        frameWidth = slashEffect.getWidth() / 6;
         frameHeight = slashEffect.getHeight();
         temp = TextureRegion.split(slashEffect, frameWidth, frameHeight);
         frames.clear();
-        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        for (int i = 0; i < 6; i++) frames.add(temp[0][i]);
 
-        slashEffectAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+        slashEffectAnimation = new Animation<>(0.08f, frames, Animation.PlayMode.NORMAL);
 
         // DownSlash Animation
         frameWidth = downSlashTexture.getWidth() / 5;
@@ -277,7 +303,6 @@ public class PlayView {
         mossFlyFlyingAnimation = new Animation<>(0.15f, frames, Animation.PlayMode.LOOP);
 
         // MossFly Turning Animation
-
         frameWidth = mossFlyTurning.getWidth() / 3;
         frameHeight = mossFlyTurning.getHeight();
         temp = TextureRegion.split(mossFlyTurning, frameWidth, frameHeight);
@@ -285,14 +310,115 @@ public class PlayView {
         for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
         mossFlyTurningAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.NORMAL);
 
+        // huskHornhead Start Attacking
+        frameWidth = huskHornheadStartAttacking.getWidth() / 5;
+        frameHeight = huskHornheadStartAttacking.getHeight();
+        temp = TextureRegion.split(huskHornheadStartAttacking, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        huskHornheadStartAttackingAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
+        // huskHornhead Attacking
+        frameWidth = huskHornheadAttacking.getWidth() / 12;
+        frameHeight = huskHornheadAttacking.getHeight();
+        temp = TextureRegion.split(huskHornheadAttacking, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 12; i++) frames.add(temp[0][i]);
+        huskHornheadAttackingAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
+
+        // huskHornhead Death
+        frameWidth = huskHornheadDeath.getWidth() / 8;
+        frameHeight = huskHornheadDeath.getHeight();
+        temp = TextureRegion.split(huskHornheadDeath, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 8; i++) frames.add(temp[0][i]);
+        huskHornheadDeathAnimation = new Animation<>(0.5f, frames, Animation.PlayMode.LOOP);
+
+        // huskHornhead Standing
+        frameWidth = huskHornheadStanding.getWidth() / 6;
+        frameHeight = huskHornheadStanding.getHeight();
+        temp = TextureRegion.split(huskHornheadStanding, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 6; i++) frames.add(temp[0][i]);
+        huskHornheadStandingAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+
+        // huskHornhead Turning
+        frameWidth = huskHornheadTurning.getWidth() / 2;
+        frameHeight = huskHornheadTurning.getHeight();
+        temp = TextureRegion.split(huskHornheadTurning, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 2; i++) frames.add(temp[0][i]);
+        huskHornheadTurningAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.NORMAL);
+
+        // huskHornhead Walking
+        frameWidth = huskHornheadWalking.getWidth() / 7;
+        frameHeight = huskHornheadWalking.getHeight();
+        temp = TextureRegion.split(huskHornheadWalking, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 7; i++) frames.add(temp[0][i]);
+        huskHornheadWalkingAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+
+        // Crystal Guardian Standing
+        frameWidth = CrystalGuardianStanding.getWidth() / 5;
+        frameHeight = CrystalGuardianStanding.getHeight();
+        temp = TextureRegion.split(CrystalGuardianStanding, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        CrystalGuardianStandingAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+
+        // Crystal Guardian Shooting
+        frameWidth = CrystalGuardianShooting.getWidth() / 7;
+        frameHeight = CrystalGuardianShooting.getHeight();
+        temp = TextureRegion.split(CrystalGuardianShooting, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 7; i++) frames.add(temp[0][i]);
+        CrystalGuardianShootingAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.NORMAL);
+
+        // Crystal Guardian Turning
+        frameWidth = CrystalGuardianTurning.getWidth() / 3;
+        frameHeight = CrystalGuardianTurning.getHeight();
+        temp = TextureRegion.split(CrystalGuardianTurning, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        CrystalGuardianTurningAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+
+        // Crystal Guardian Attacking
+        frameWidth = CrystalGuardianAttacking.getWidth() / 6;
+        frameHeight = CrystalGuardianAttacking.getHeight();
+        temp = TextureRegion.split(CrystalGuardianAttacking, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 6; i++) frames.add(temp[0][i]);
+        CrystalGuardianAttackingAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
+
+        // Crystal Guardian Evading
+        frameWidth = CrystalGuardianEvading.getWidth() / 7;
+        frameHeight = CrystalGuardianEvading.getHeight();
+        temp = TextureRegion.split(CrystalGuardianEvading, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 7; i++) frames.add(temp[0][i]);
+        CrystalGuardianEvadingAnimation = new Animation<>(0.08f, frames, Animation.PlayMode.LOOP);
+
+        // Crystal Guardian Death
+        frameWidth = CrystalGuardianDeathLand.getWidth() / 3;
+        frameHeight = CrystalGuardianDeathLand.getHeight();
+        temp = TextureRegion.split(CrystalGuardianDeathLand, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        for (int i = 2; i >= 1; i--) frames.add(temp[0][i]);
+        CrystalGuardianDeathLandAnimation = new Animation<>(0.5f, frames, Animation.PlayMode.LOOP);
+
+
     }
 
-    public void render(Knight knight, Array<Enemy> enemies, OrthographicCamera camera) {
+    public void render(Knight knight, Array<Enemy> enemies, BreakableWall breakableWall,  OrthographicCamera camera) {
         mapRenderer.setView(camera);
 
         mapRenderer.render(backgroundLayers);
         mapRenderer.render(midLayer);
 
+        if (!breakableWall.isBroken) {
+            mapRenderer.render(darkRoom);
+        }
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -320,8 +446,8 @@ public class PlayView {
             batch.draw(
                 currentSlashEffect.getTexture(),
                 knight.positionX - (knight.width / 2),
-                knight.positionY - 40f,
-                knight.width, 40f,
+                knight.positionY - knight.height,
+                knight.width, knight.height,
                 currentFrame.getRegionX(), currentFrame.getRegionY(),
                 currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
                 knight.isGoingRight, false
@@ -349,15 +475,6 @@ public class PlayView {
             currentFrame = idleAnimation.getKeyFrame(stateDuration, true);
         }
 
-        batch.draw(
-            currentFrame.getTexture(),
-            knight.positionX - 90f, knight.positionY - 2f,
-            knight.width, knight.height,
-            currentFrame.getRegionX(), currentFrame.getRegionY(),
-            currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
-            knight.isGoingRight, false
-        );
-
         for (Enemy enemy : enemies) {
             TextureRegion currentEnemyFrame = null;
 
@@ -371,7 +488,9 @@ public class PlayView {
                 } else {
                     currentEnemyFrame = mossCreepWalkAnimation.getKeyFrame(enemy.stateDuration, true);
                 }
-            } else if (enemy instanceof MossFly) {
+            }
+
+            else if (enemy instanceof MossFly) {
                 if (((MossFly) enemy).currentState == MossFly.State.TURNING_TO_FLY) {
                     currentEnemyFrame = mossFlyTurningAnimation.getKeyFrame(enemy.stateDuration, false);
                 } else if (((MossFly) enemy).currentState == MossFly.State.DEATH_AIR) {
@@ -387,6 +506,48 @@ public class PlayView {
                 }
             }
 
+            else if (enemy instanceof HuskHornhead) {
+                if (((HuskHornhead) enemy).currentState == HuskHornhead.State.TURNING) {
+                    currentEnemyFrame = huskHornheadTurningAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((HuskHornhead) enemy).currentState == HuskHornhead.State.ATTACKING) {
+                    currentEnemyFrame = huskHornheadAttackingAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else if (((HuskHornhead) enemy).currentState == HuskHornhead.State.START_ATTACKING) {
+                    currentEnemyFrame = huskHornheadStartAttackingAnimation.getKeyFrame(enemy.stateDuration, false);
+                } else if (((HuskHornhead) enemy).currentState == HuskHornhead.State.DEATH) {
+                    currentEnemyFrame = huskHornheadDeathAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else if (((HuskHornhead) enemy).currentState == HuskHornhead.State.STANDING) {
+                    currentEnemyFrame = huskHornheadStandingAnimation.getKeyFrame(enemy.stateDuration, true);
+                } else {
+                    currentEnemyFrame = huskHornheadWalkingAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+            }
+
+            else if (enemy instanceof CrystalGuardian) {
+                if (((CrystalGuardian) enemy).currentState == CrystalGuardian.State.TURNING) {
+                    currentEnemyFrame = CrystalGuardianTurningAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((CrystalGuardian) enemy).currentState == CrystalGuardian.State.ATTACKING) {
+                    currentEnemyFrame = CrystalGuardianAttackingAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+
+                else if (((CrystalGuardian) enemy).currentState == CrystalGuardian.State.SHOOTING) {
+                    currentEnemyFrame = CrystalGuardianShootingAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((CrystalGuardian) enemy).currentState == CrystalGuardian.State.EVADE) {
+                    currentEnemyFrame = CrystalGuardianEvadingAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((CrystalGuardian) enemy).currentState == CrystalGuardian.State.DEATH) {
+                    currentEnemyFrame = CrystalGuardianDeathLandAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+
+                else {
+                    currentEnemyFrame = CrystalGuardianStandingAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+            }
+
             if (currentEnemyFrame != null) {
                 batch.draw(
                     currentEnemyFrame.getTexture(),
@@ -398,6 +559,36 @@ public class PlayView {
                 );
             }
         }
+
+        if (!breakableWall.isBroken) {
+            TextureRegion breakableWallFrame;
+
+            if (breakableWall.hp == 3 || breakableWall.hp == 2) {
+                breakableWallFrame = new TextureRegion(breakableWallFirst);
+            } else if (breakableWall.hp == 1) {
+                breakableWallFrame = new TextureRegion(breakableWallSecond);
+            } else {
+                breakableWallFrame = new TextureRegion(breakableWallLast);
+            }
+
+            float shakeX = 0;
+            if (breakableWall.shakeTimer > 0) {
+                breakableWall.shakeTimer -= Gdx.graphics.getDeltaTime();
+                shakeX = (float) (Math.random() * 10 - 2);
+            }
+
+            batch.draw(breakableWallFrame,breakableWall.x + shakeX, breakableWall.y, breakableWall.width, breakableWall.height);
+        }
+
+
+        batch.draw(
+            currentFrame.getTexture(),
+            knight.positionX - 90f, knight.positionY - 2f,
+            knight.width, knight.height,
+            currentFrame.getRegionX(), currentFrame.getRegionY(),
+            currentFrame.getRegionWidth(), currentFrame.getRegionHeight(),
+            knight.isGoingRight, false
+        );
 
         batch.end();
         mapRenderer.render(foregroundLayers);

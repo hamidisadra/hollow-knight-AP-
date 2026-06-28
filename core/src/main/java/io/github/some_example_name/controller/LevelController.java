@@ -1,5 +1,7 @@
 package io.github.some_example_name.controller;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -7,9 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import io.github.some_example_name.model.entities.Enemy;
-import io.github.some_example_name.model.entities.MossFly;
-import io.github.some_example_name.model.entities.Mosscreep;
+import io.github.some_example_name.model.entities.*;
 
 
 public class LevelController {
@@ -20,6 +20,9 @@ public class LevelController {
 
     public float playerSpawnX, playerSpawnY;
 
+    public BreakableWall breakableWall;
+    public float voidHeartCharmSpawnX, voidHeartCharmSpawnY;
+
     public LevelController(String mapFilePath) {
         platforms = new Array<>();
         spikes = new Array<>();
@@ -28,7 +31,11 @@ public class LevelController {
         map = new TmxMapLoader().load(mapFilePath);
 
         loadMapData();
-        stickEnemiesToGround();
+
+        for (Enemy enemy : enemies) {
+                stickEnemiesToGround(enemy);
+
+        }
     }
 
     private void loadMapData() {
@@ -43,28 +50,69 @@ public class LevelController {
                 playerSpawnX = object.getProperties().get("x", Float.class);
                 playerSpawnY = object.getProperties().get("y", Float.class);
             }
+
             else if ("mossCreep".equals(name)) {
                 float x = object.getProperties().get("x", Float.class);
                 float rawY = object.getProperties().get("y", Float.class);
                 enemies.add(new Mosscreep(x, mapHeightInPixels - rawY));
             }
+
             else if ("mossFly".equals(name)) {
                 float x = object.getProperties().get("x", Float.class);
                 float rawY = object.getProperties().get("y", Float.class);
                 enemies.add(new MossFly(x, mapHeightInPixels - rawY));
             }
+
+            else if ("huskHornheadSpawn".equals(name)) {
+                float x = object.getProperties().get("x", Float.class);
+                float rawY = object.getProperties().get("y", Float.class);
+                enemies.add(new HuskHornhead(x, rawY));
+            }
+
+            else if ("CrystalGuardianSpawn".equals(name)) {
+                float x = object.getProperties().get("x", Float.class);
+                float rawY = object.getProperties().get("y", Float.class);
+                enemies.add(new CrystalGuardian(x, rawY));
+            }
+
+            else if ("voidHeart".equals(name)) {
+                voidHeartCharmSpawnX = object.getProperties().get("x", Float.class);
+                voidHeartCharmSpawnY = object.getProperties().get("y", Float.class);
+            }
+
             else if (object instanceof RectangleMapObject) {
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+
                 if ("spike".equals(name)) {
                     spikes.add(rectangle);
-                } else if (!"boss fight area".equals(name)) {
+                }
+
+                else if ("breakableWall".equals(name)) {
+                    this.breakableWall = new BreakableWall(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+                }
+
+                else if (!"boss fight area".equals(name)) {
                     platforms.add(rectangle);
                 }
             }
         }
     }
 
-    private void stickEnemiesToGround() {
+    private void stickEnemiesToGround(Enemy enemy) {
+        Rectangle tempRect = new Rectangle(enemy.hitBox.x, enemy.hitBox.y - 1000f, enemy.hitBox.width, 1000f);
+
+        for (Rectangle bound : platforms) {
+            if (tempRect.overlaps(bound)) {
+                enemy.positionY = bound.y + bound.height;
+                enemy.spawny = bound.y + bound.height;
+                enemy.updateHitBox();
+                break;
+            }
+        }
+
+
+
+        /*
         for (Enemy enemy : enemies) {
             float closestFloorY = -1000f;
 
@@ -87,6 +135,7 @@ public class LevelController {
                 enemy.updateHitBox();
             }
         }
+         */
     }
 
     public void dispose() {

@@ -57,30 +57,27 @@ public class Mosscreep extends Enemy{
             this.positionX += this.velocityX * delta;
             this.updateHitBox();
 
+            Rectangle wallSensor = new Rectangle(
+                isGoingRight ? positionX + width : positionX - 2f,
+                positionY + 10f,
+                2f, height - 20f
+            );
+
+            Rectangle groundSensor = new Rectangle(
+                isGoingRight ? positionX + width + 2f : positionX - 5f,
+                positionY - 15f,
+                3f, 20f
+            );
+
+            boolean hasGroundAhead = false;
             boolean hitWall = false;
+
             for (Rectangle bound : platforms) {
-                if (this.hitBox.overlaps(bound)) {
-                    hitWall = true;
-                    if (this.velocityX > 0) {
-                        this.positionX = bound.x - this.width;
-                    }
-                    else if (this.velocityX < 0) {
-                        this.positionX = bound.x + bound.width;
-                    }
-                    this.updateHitBox();
-                    break;
-                }
+                if (groundSensor.overlaps(bound)) hasGroundAhead = true;
+                if (wallSensor.overlaps(bound)) hitWall = true;
             }
 
-            for (Rectangle spike : spikes) {
-                if (this.hitBox.overlaps(spike)) {
-                    this.isDead = true;
-                    this.velocityX = 0;
-                    this.hitBox.height = 20f;
-                }
-            }
-
-            if (hitWall) {
+            if (!hasGroundAhead || hitWall) {
                 this.isTurning = true;
                 this.turnTimer = 0.6f;
             }
