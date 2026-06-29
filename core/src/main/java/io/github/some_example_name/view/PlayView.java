@@ -36,6 +36,10 @@ public class PlayView {
 
     private Texture breakableWallFirst, breakableWallSecond, breakableWallLast;
 
+    private Texture falseKnightStanding, falseKnightRunning, falseKnightRunAntic, falseKnightJumpAntic, falseKnightJumpAttack, falseKnightJump, falseKnightLand, falseKnightStunRecover, falseKnightDeathLand, falseKnightDeathFall, falseKnightDeathHit, falseKnightBody, falseKnightAttackAntic, falseKnightAttack, falseKnightAttackRecover;
+    private Animation<TextureRegion> falseKnightStandingAnimation, falseKnightRunningAnimation, falseKnightRunAnticAnimation, falseKnightJumpAnticAnimation, falseKnightJumpAttackAnimation, falseKnightJumpAnimation, falseKnightLandAnimation, falseKnightStunRecoverAnimation, falseKnightDeathLandAnimation, falseKnightDeathFallAnimation, falseKnightDeathHitAnimation, falseKnightBodyAnimation, falseKnightAttackAnticAnimation, falseKnightAttackAnimation, falseKnightAttackRecoverAnimation;
+
+
     private final int[] backgroundLayers;
     private final int[] midLayer;
     private final int[] darkRoom;
@@ -134,6 +138,24 @@ public class PlayView {
         this.breakableWallFirst = new Texture(Gdx.files.internal("breakableWall/First.png"));
         this.breakableWallSecond = new Texture(Gdx.files.internal("breakableWall/Second.png"));
         this.breakableWallLast = new Texture(Gdx.files.internal("breakableWall/Last.png"));
+
+        this.falseKnightStanding = new Texture(Gdx.files.internal("FalseKnight/Idle.png"));
+        this.falseKnightRunning = new Texture(Gdx.files.internal("FalseKnight/Run.png"));
+        this.falseKnightRunAntic = new Texture(Gdx.files.internal("FalseKnight/Run Antic.png"));
+        this.falseKnightStunRecover = new Texture(Gdx.files.internal("FalseKnight/Stun Recover.png"));
+        this.falseKnightJumpAntic = new Texture(Gdx.files.internal("FalseKnight/Jump Antic.png"));
+        this.falseKnightJumpAttack = new Texture(Gdx.files.internal("FalseKnight/Jump Attack.png"));
+        this.falseKnightJump = new Texture(Gdx.files.internal("FalseKnight/Jump.png"));
+        this.falseKnightLand = new Texture(Gdx.files.internal("FalseKnight/Land.png"));
+        this.falseKnightDeathLand = new Texture(Gdx.files.internal("FalseKnight/DeathLand.png"));
+        this.falseKnightDeathHit = new Texture(Gdx.files.internal("FalseKnight/DeathHit.png"));
+        this.falseKnightDeathFall = new Texture(Gdx.files.internal("FalseKnight/DeathFall.png"));
+        this.falseKnightBody = new Texture(Gdx.files.internal("FalseKnight/Body.png"));
+        this.falseKnightAttackAntic = new Texture(Gdx.files.internal("FalseKnight/Attack Antic.png"));
+        this.falseKnightAttack = new Texture(Gdx.files.internal("FalseKnight/Attack.png"));
+        this.falseKnightAttackRecover = new Texture(Gdx.files.internal("FalseKnight/Attack Recover.png"));
+
+
 
     }
 
@@ -407,6 +429,142 @@ public class PlayView {
         for (int i = 2; i >= 1; i--) frames.add(temp[0][i]);
         CrystalGuardianDeathLandAnimation = new Animation<>(0.5f, frames, Animation.PlayMode.LOOP);
 
+        // False Knight Standing
+
+        frameWidth = falseKnightStanding.getWidth() / 5;
+        frameHeight = falseKnightStanding.getHeight();
+        temp = TextureRegion.split(falseKnightStanding, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        falseKnightStandingAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+
+        // False Knight Running
+
+        frameWidth = falseKnightRunning.getWidth() / 5;
+        frameHeight = falseKnightRunning.getHeight();
+        temp = TextureRegion.split(falseKnightRunning, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        falseKnightRunningAnimation = new Animation<>(0.15f, frames, Animation.PlayMode.LOOP);
+
+        // False Knight RunAntic
+
+        frameWidth = falseKnightRunAntic.getWidth() / 2;
+        frameHeight = falseKnightRunAntic.getHeight();
+        temp = TextureRegion.split(falseKnightRunAntic, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 2; i++) frames.add(temp[0][i]);
+        falseKnightRunAnticAnimation = new Animation<>(0.05f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight JumpAntic
+
+        frameWidth = falseKnightJumpAntic.getWidth() / 3;
+        frameHeight = falseKnightJumpAntic.getHeight();
+        temp = TextureRegion.split(falseKnightJumpAntic, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        falseKnightJumpAnticAnimation = new Animation<>(0.05f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight JumpAttack
+
+        frameWidth = falseKnightJumpAttack.getWidth() / 8;
+        frameHeight = falseKnightJumpAttack.getHeight();
+        temp = TextureRegion.split(falseKnightJumpAttack, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 8; i++) frames.add(temp[0][i]);
+        falseKnightJumpAttackAnimation = new Animation<>(0.2f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight Jump
+
+        frameWidth = falseKnightJump.getWidth() / 4;
+        frameHeight = falseKnightJump.getHeight();
+        temp = TextureRegion.split(falseKnightJump, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 4; i++) frames.add(temp[0][i]);
+        falseKnightJumpAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight Land
+
+        frameWidth = falseKnightLand.getWidth() / 5;
+        frameHeight = falseKnightLand.getHeight();
+        temp = TextureRegion.split(falseKnightLand, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        falseKnightLandAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight StunRecover
+
+        frameWidth = falseKnightStunRecover.getWidth() / 6;
+        frameHeight = falseKnightStunRecover.getHeight();
+        temp = TextureRegion.split(falseKnightStunRecover, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 6; i++) frames.add(temp[0][i]);
+        falseKnightStunRecoverAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight DeathLand
+
+        frameWidth = falseKnightDeathLand.getWidth() / 11;
+        frameHeight = falseKnightDeathLand.getHeight();
+        temp = TextureRegion.split(falseKnightDeathLand, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 11; i++) frames.add(temp[0][i]);
+        falseKnightDeathLandAnimation = new Animation<>(0.12f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight DeathHit
+
+        frameWidth = falseKnightDeathHit.getWidth() / 3;
+        frameHeight = falseKnightDeathHit.getHeight();
+        temp = TextureRegion.split(falseKnightDeathHit, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        falseKnightDeathHitAnimation = new Animation<>(0.15f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight DeathFall
+
+        frameWidth = falseKnightDeathFall.getWidth() / 3;
+        frameHeight = falseKnightDeathFall.getHeight();
+        temp = TextureRegion.split(falseKnightDeathFall, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        falseKnightDeathFallAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight Body
+
+        frameWidth = falseKnightBody.getWidth() / 5;
+        frameHeight = falseKnightBody.getHeight();
+        temp = TextureRegion.split(falseKnightBody, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        falseKnightBodyAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
+
+        // False Knight Attack
+
+        frameWidth = falseKnightAttack.getWidth() / 3;
+        frameHeight = falseKnightAttack.getHeight();
+        temp = TextureRegion.split(falseKnightAttack, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 3; i++) frames.add(temp[0][i]);
+        falseKnightAttackAnimation = new Animation<>(0.07f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight AttackRecover
+
+        frameWidth = falseKnightAttackRecover.getWidth() / 5;
+        frameHeight = falseKnightAttackRecover.getHeight();
+        temp = TextureRegion.split(falseKnightAttackRecover, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 5; i++) frames.add(temp[0][i]);
+        falseKnightAttackRecoverAnimation = new Animation<>(0.07f, frames, Animation.PlayMode.NORMAL);
+
+        // False Knight AttackAntic
+
+        frameWidth = falseKnightAttackAntic.getWidth() / 6;
+        frameHeight = falseKnightAttackAntic.getHeight();
+        temp = TextureRegion.split(falseKnightAttackAntic, frameWidth, frameHeight);
+        frames.clear();
+        for (int i = 0; i < 6; i++) frames.add(temp[0][i]);
+        falseKnightAttackAnticAnimation = new Animation<>(0.05f, frames, Animation.PlayMode.NORMAL);
+
+
 
     }
 
@@ -545,6 +703,68 @@ public class PlayView {
 
                 else {
                     currentEnemyFrame = CrystalGuardianStandingAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+            }
+
+            else if (enemy instanceof FalseKnight) {
+                if (((FalseKnight) enemy).currentState == FalseKnight.State.RUN_ANTIC) {
+                    currentEnemyFrame = falseKnightRunAnticAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.RUN) {
+                    currentEnemyFrame = falseKnightRunningAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.JUMP_ANTIC) {
+                    currentEnemyFrame = falseKnightJumpAnticAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.JUMP_ATTACK) {
+                    currentEnemyFrame = falseKnightJumpAttackAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.JUMP) {
+                    currentEnemyFrame = falseKnightJumpAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.LAND) {
+                    currentEnemyFrame = falseKnightLandAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.ATTACK_ANTIC) {
+                    currentEnemyFrame = falseKnightAttackAnticAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.ATTACK) {
+                    currentEnemyFrame = falseKnightAttackAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.ATTACK_RECOVER) {
+                    currentEnemyFrame = falseKnightAttackRecoverAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.DEATH_FALL) {
+                    currentEnemyFrame = falseKnightDeathFallAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.DEATH_LAND) {
+                    currentEnemyFrame = falseKnightDeathLandAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.STUNNED || ((FalseKnight) enemy).currentState == FalseKnight.State.DEATH) {
+                    currentEnemyFrame = falseKnightBodyAnimation.getKeyFrame(enemy.stateDuration, true);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.STUN_RECOVER) {
+                    currentEnemyFrame = falseKnightStunRecoverAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else if (((FalseKnight) enemy).currentState == FalseKnight.State.DEATH_HIT) {
+                    currentEnemyFrame = falseKnightDeathHitAnimation.getKeyFrame(enemy.stateDuration, false);
+                }
+
+                else {
+                    currentEnemyFrame = falseKnightStandingAnimation.getKeyFrame(enemy.stateDuration, true);
                 }
             }
 

@@ -98,6 +98,11 @@ public class PlayerController implements Screen {
         applyGravity(delta);
         handleAttackInput(delta);
 
+
+        camera.position.x = knight.positionX;
+        camera.position.y = knight.positionY;
+        camera.update();
+
         moveHorizontal(delta);
         resolveHorizontalCollisions();
 
@@ -128,9 +133,6 @@ public class PlayerController implements Screen {
             }
         }
 
-        camera.position.x = knight.positionX;
-        camera.position.y = knight.positionY;
-        camera.update();
     }
 
 
@@ -296,10 +298,10 @@ public class PlayerController implements Screen {
     private void resolveHorizontalCollisions() {
         boolean isWallSliding = false;
 
-            Rectangle horizontalHitBox = new Rectangle(
+        Rectangle horizontalHitBox = new Rectangle(
             knight.hitBox.x,
             knight.hitBox.y + 2f,
-            knight.hitBox.width ,
+            knight.hitBox.width,
             knight.hitBox.height - 4f
         );
 
@@ -316,6 +318,22 @@ public class PlayerController implements Screen {
                         isWallSliding = true;
                     }
                 }
+                knight.velocityX = 0;
+                knight.updateHitBox();
+                horizontalHitBox.x = knight.positionX;
+            }
+        }
+
+        for (Rectangle bounds : levelController.mapWalls) {
+            if (horizontalHitBox.overlaps(bounds)) {
+                if (knight.velocityX > 0) {
+                    knight.positionX = bounds.x - knight.hitBox.width;
+                }
+
+                else if (knight.velocityX < 0) {
+                    knight.positionX = bounds.x + bounds.width;
+                }
+
                 knight.velocityX = 0;
                 knight.updateHitBox();
                 horizontalHitBox.x = knight.positionX;
@@ -341,6 +359,34 @@ public class PlayerController implements Screen {
             horizontalHitBox.x = knight.positionX;
         }
 
+        if (!levelController.isInBossFightArea) {
+            if (knight.hitBox.x - camera.viewportWidth / 2 > levelController.bossFightArea.x) {
+                levelController.isInBossFightArea = true;
+
+                Rectangle rectangle = levelController.bossFightArea;
+
+                levelController.mapWalls.add(
+                    new Rectangle(rectangle.x - 100f, rectangle.y, 100f, rectangle.height)
+                );
+            }
+        }
+
+        if (levelController.isInBossFightArea) {
+
+            Rectangle rectangle = levelController.bossFightArea;
+
+
+            float minCamX = rectangle.x + camera.viewportWidth / 2;
+            float maxCamX = rectangle.x + rectangle.width - camera.viewportWidth / 2;
+
+            float minCamY = rectangle.y - camera.viewportHeight  / 2;
+            float maxCamY = rectangle.y + rectangle.height - camera.viewportHeight / 2;
+
+            camera.position.x = com.badlogic.gdx.math.MathUtils.clamp(camera.position.x, minCamX, maxCamX);
+            camera.position.y = com.badlogic.gdx.math.MathUtils.clamp(camera.position.y, minCamY, maxCamY);
+        }
+
+        camera.update();
         knight.isWallSliding = isWallSliding;
     }
 
@@ -466,6 +512,12 @@ public class PlayerController implements Screen {
                 debugRender.setColor(Color.YELLOW);
 
                 debugRender.rect(((CrystalGuardian) enemy).laserHitbox.x, ((CrystalGuardian) enemy).laserHitbox.y, ((CrystalGuardian) enemy).laserHitbox.width, ((CrystalGuardian) enemy).laserHitbox.height);
+            }
+
+            if (enemy instanceof FalseKnight) {
+                debugRender.setColor(Color.BROWN);
+
+                debugRender.rect(enemy.hitBox.x, enemy.hitBox.y, enemy.hitBox.width, enemy.hitBox.height);
             }
         }
 

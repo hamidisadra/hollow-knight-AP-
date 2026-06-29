@@ -16,16 +16,22 @@ public class LevelController {
     public TiledMap map;
     public Array<Rectangle> platforms;
     public Array<Rectangle> spikes;
+    public static Array<Rectangle> mapWalls;
     public Array<Enemy> enemies;
+
+    public Rectangle bossFightArea;
 
     public float playerSpawnX, playerSpawnY;
 
     public BreakableWall breakableWall;
     public float voidHeartCharmSpawnX, voidHeartCharmSpawnY;
 
+    public boolean isInBossFightArea = false;
+
     public LevelController(String mapFilePath) {
         platforms = new Array<>();
         spikes = new Array<>();
+        mapWalls = new Array<>();
         enemies = new Array<>();
 
         map = new TmxMapLoader().load(mapFilePath);
@@ -75,6 +81,13 @@ public class LevelController {
                 enemies.add(new CrystalGuardian(x, rawY));
             }
 
+            else if ("FalseKnightSpawn".equals(name)) {
+                float x = object.getProperties().get("x", Float.class);
+                float y = object.getProperties().get("y", Float.class);
+
+                enemies.add(new FalseKnight(x, y));
+            }
+
             else if ("voidHeart".equals(name)) {
                 voidHeartCharmSpawnX = object.getProperties().get("x", Float.class);
                 voidHeartCharmSpawnY = object.getProperties().get("y", Float.class);
@@ -87,11 +100,19 @@ public class LevelController {
                     spikes.add(rectangle);
                 }
 
+                else if ("MapWall".equals(name)) {
+                    mapWalls.add(rectangle);
+                }
+
                 else if ("breakableWall".equals(name)) {
                     this.breakableWall = new BreakableWall(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
                 }
 
-                else if (!"boss fight area".equals(name)) {
+                else if ("boss fight area".equals(name)) {
+                    bossFightArea = rectangle;
+                }
+
+                else {
                     platforms.add(rectangle);
                 }
             }
